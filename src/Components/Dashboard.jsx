@@ -12,11 +12,11 @@ function Dashboard() {
             <div id="formContainer">
 
                 <div className="form-container">
-                    <div className="form">
+                    <div className="form d-flex flex-wrap">
                         <span className="heading">Practice Assignment</span>
                         <span className="c1">Here we have 3 counters, one for each role.</span>
                         <span className="c2">Only admin, moderator and user can change their counters respectively.</span>
-                        <div className="button-container">
+                        <div className="button-container d-flex flex-wrap">
 
                             <Link to='/signup'> <button className="send-button">Signup</button></Link>
                             <div className="reset-button-container">
