@@ -6,14 +6,16 @@ import url from "../../url"
 
 function HomePage() {
 
-
     const navigate = useNavigate();
 
     const [adminCounter, setAdminCounter] = useState();
     const [moderatorCounter, setModeratorCounter] = useState();
     const [userCounter, setUserCounter] = useState();
 
+    // For getting values on first render
+
     const getCounterValues = async () => {
+
         const authToken = localStorage.getItem("authTokens")
 
         if (!authToken) {
@@ -37,7 +39,10 @@ function HomePage() {
         }
     }
 
+    // To verify if user is authorized to access values
+
     const verifyAccess = async () => {
+
         const authToken = localStorage.getItem("authTokens")
         const res = await fetch(`${url}/access`, {
             method: 'POST',
@@ -50,12 +55,14 @@ function HomePage() {
         })
 
         const data = await res.json();
-
         return data.role;
 
     }
 
+    // To increment admin count.
+
     const adminCount = async () => {
+
         const role = await verifyAccess();
         if (role === "admin") {
             setAdminCounter(adminCounter + 1);
@@ -72,10 +79,14 @@ function HomePage() {
             })
         }
         else {
-            alert("You are not " + "admin" + ". You can change only " + role + " count.")
+            alert("You are not admin. You can change only " + role + " count.")
         }
     }
+
+    // To increment moderator count.
+
     const moderatorCount = async () => {
+
         const role = await verifyAccess();
         if (role === "moderator") {
             setModeratorCounter(moderatorCounter + 1);
@@ -92,9 +103,12 @@ function HomePage() {
             })
         }
         else {
-            alert("You are not " + "moderator" + ". You can change only " + role + " count.")
+            alert("You are not moderatorYou can change only " + role + " count.")
         }
     }
+
+    // To increment user count.
+
     const userCount = async () => {
         const role = await verifyAccess();
         if (role === "user") {
@@ -112,9 +126,11 @@ function HomePage() {
             })
         }
         else {
-            alert("You are not " + "user" + ". You can change only " + role + " count.")
+            alert("You are not user. You can change only " + role + " count.")
         }
     }
+
+    // To logout
 
     const logout = () => {
         localStorage.removeItem("authTokens");
@@ -123,23 +139,18 @@ function HomePage() {
 
     useEffect(() => {
         getCounterValues();
-    }, [ moderatorCounter, userCounter]);
+    }, [ adminCounter, moderatorCounter, userCounter]);
 
 
     return (
         <>
             <div className="container" style={{ backgroundColor: "#fff", maxWidth: "80%", borderRadius: "10px", marginTop: "5%", padding: "30px" }}>
-
-
                 <div className="fs-5 mt-1"> Admin Counter value : {adminCounter}</div>
                 <button className="btn btn-primary mt-3" onClick={adminCount}>Admin Counter</button>
-
                 <div className="fs-5 mt-5"> Moderator Counter value : {moderatorCounter}</div>
                 <button className="btn btn-primary mt-3" onClick={moderatorCount}>Moderator Counter</button>
-
                 <div className="fs-5 mt-5"> User Counter value : {userCounter}</div>
                 <button className="btn btn-primary mt-3" onClick={userCount}>User Counter</button>
-
                 <button type="button" className="btn btn-danger ms-2 mt-5 d-block" onClick={logout}>Log out</button>
 
             </div>

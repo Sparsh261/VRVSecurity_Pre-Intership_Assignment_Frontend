@@ -1,11 +1,8 @@
-/* From Uiverse.io by Prakhar227 */ 
 
 #formContainer{
   height: 100vh;
-  /* width: ; */
   padding: 10% 25%;
   background-color:#25495a;
-  /* margin: 5%; */
 }
 
 .orange {
