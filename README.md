@@ -1,3 +1,9 @@
+It is the frontend for VRV Security assignment.
+You can signup and login.
+Then you can update values only for that are specified by your role.
+
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
